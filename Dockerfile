@@ -1,4 +1,7 @@
-FROM ubuntu:bionic
+FROM debian:buster
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -38,14 +41,13 @@ RUN apt-get update && \
     libz-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt update && \
+    apt install -y \
     mopidy \
     mopidy-dleyna \
     mopidy-podcast \
     mopidy-podcast-itunes \
-    mopidy-tunein \ 
-    mopidy-youtube && \
+    mopidy-tunein && \ 
     rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install \
@@ -53,6 +55,7 @@ RUN pip3 install \
     Mopidy-Local \
     Mopidy-Spotify \
     Mopidy-Party \
+    Mopidy-Youtube \ 
     Mopidy-Iris
 
 RUN mkdir -p /share/mopidy/data
