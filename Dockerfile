@@ -1,5 +1,5 @@
-FROM python:slim
-ENV DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:bionic
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     wget \
@@ -12,7 +12,7 @@ RUN wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add - && \
     wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/buster.list
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
     tzdata \
     build-essential \
     python3-dev \
@@ -38,13 +38,21 @@ RUN apt-get update && \
     libz-dev && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && \
+    apt-get install -y \
+    mopidy \
+    mopidy-dleyna \
+    mopidy-podcast \
+    mopidy-podcast-itunes \
+    mopidy-tunein \ 
+    mopidy-youtube && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN pip3 install \
-    Mopidy \
     Mopidy-MPD \
     Mopidy-Local \
-    Mopidy-TuneIn \
-    Mopidy-GMusic \
     Mopidy-Spotify \
+    Mopidy-Party \
     Mopidy-Iris
 
 RUN mkdir -p /share/mopidy/data
