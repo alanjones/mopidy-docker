@@ -50,6 +50,7 @@ RUN pip3 install \
 RUN mkdir -p /share/mopidy/data
 COPY mopidy.conf /root/.config/mopidy_default.conf
 COPY mopidy.sh /usr/local/bin/mopidy.sh
+RUN chmod a+x /usr/local/bin/mopidy.sh
 
 EXPOSE 6600 6680
 ENTRYPOINT ["/usr/local/bin/mopidy.sh"]
