@@ -54,11 +54,13 @@ RUN pip3 install \
     Mopidy-MPD \
     Mopidy-Local \
     Mopidy-Spotify \
+    Mopidy-Plex \
     Mopidy-Party \
     Mopidy-Youtube \ 
     Mopidy-Iris
 
 RUN mkdir -p /share/mopidy/data
+RUN echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.7/dist-packages/mopidy_iris/system.sh" >> /etc/sudoers
 COPY mopidy.conf /root/.config/mopidy_default.conf
 COPY mopidy.sh /usr/local/bin/mopidy.sh
 RUN chmod a+x /usr/local/bin/mopidy.sh
